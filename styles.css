@@ -1,0 +1,34 @@
+/* The design for the game (Radu) */
+body {
+    background-image: url("images/44156943_dark_blue_gradient_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    margin: 0;
+    padding: 20px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(10, 110px);
+    gap: 12px;
+    justify-content: center;
+}
+
+.card {
+    width: 110px;
+    height: 90px;
+    border: 2px solid #555;
+    border-radius: 10px;
+
+    overflow: hidden;
+    background-color: white;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
