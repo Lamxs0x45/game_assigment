@@ -82,14 +82,16 @@ cards.forEach(function(card){
 });
 console.log(cards.length);
 // This lets the player click the cards (Salvatore)
-let firstCard = null;
-let secondCard = null;     
-let boardLocked = false;   
+let firstCard = null; 
+let secondCard = null;   
 function cardClicked(card) {
-    if (boardLocked) {
+    if (secondCard != null) {
         return;
     }
-    if (card.getAttribute("class") != "card") {
+    if (card == firstCard) {
+        return;
+    }
+    if (card.getAttribute("class") == "card flipped matched") {
         return;
     }
     card.classList.add("flipped");
@@ -103,13 +105,11 @@ function cardClicked(card) {
             firstCard = null;
             secondCard = null;
         } else {
-            boardLocked = true;
             setTimeout(function() {
                 firstCard.classList.remove("flipped");
                 secondCard.classList.remove("flipped");
                 firstCard = null;
                 secondCard = null;
-                boardLocked = false;
             }, 1000);
         }
     }
