@@ -1,6 +1,6 @@
 // All the images (Radu) image paths fixed (Salvatore)
 const cardData = [
-    { name: "Adam", image: "Cards/1Adam salicath Kaabi.png" },
+    { name: "Adam", image: "Cards/1Adam Salicath Kaabi.png" },
     { name: "Alexandru", image: "Cards/2Alexandru Nicolas Birta.png" },
     { name: "Alisia", image: "Cards/3Alisia Cristina Muresan.png" },
     { name: "Andrii", image: "Cards/4Andrii Petrenko.png" },
