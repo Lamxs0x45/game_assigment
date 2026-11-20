@@ -65,20 +65,63 @@ function shuffleCards(cardArray) {
     }
 }
 shuffleCards(cards);
-// This will render the shuffled cards (Radu)
+// This will render the shuffled cards (Radu) click function (Salvatore)
 const board = document.getElementById("board");
 cards.forEach(function(card){
     const cardElement = document.createElement("div");
     cardElement.className = "card";
     cardElement.dataset.pair = card.pairId;
-
+    cardElement.addEventListener("click", function() {
+        cardClicked(cardElement);
+    });
     const imageElement = document.createElement("img");
     imageElement.src = card.image;
     imageElement.alt = card.name;
-
     cardElement.appendChild(imageElement);
-
     board.appendChild(cardElement);
 });
-
 console.log(cards.length);
+// This lets the player click the cards (Salvatore)
+let firstCard = null;
+let secondCard = null;     
+let boardLocked = false;   
+function cardClicked(card) {
+    if (boardLocked) {
+        return;
+    }
+    if (card.getAttribute("class") != "card") {
+        return;
+    }
+    card.classList.add("flipped");
+    if (firstCard == null) {
+        firstCard = card;
+    } else {
+        secondCard = card;
+        if (checkPair(firstCard, secondCard)) {
+            firstCard.classList.add("matched");
+            secondCard.classList.add("matched");
+            firstCard = null;
+            secondCard = null;
+        } else {
+            boardLocked = true;
+            setTimeout(function() {
+                firstCard.classList.remove("flipped");
+                secondCard.classList.remove("flipped");
+                firstCard = null;
+                secondCard = null;
+                boardLocked = false;
+            }, 1000);
+        }
+    }
+}
+// This checks if two cards are a correct pair (Salvatore)
+function checkPair(firstCard, secondCard) {
+    if (firstCard == secondCard) {
+        return false;
+    }
+    if (firstCard.dataset.pair == secondCard.dataset.pair) {
+        return true;
+    } else {
+        return false;
+    }
+}
