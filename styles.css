@@ -1,28 +1,49 @@
 /* The design for the game (Radu) */
 body {
-    background-image: url("44156943_dark_blue_gradient_background.jpg");
+    margin: 0;
+    padding: 20px;
+
+    background-image: url("images/44156943_dark_blue_gradient_background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
 
-    margin: 0;
-    padding: 20px;
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-title {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #board {
     display: grid;
-    grid-template-columns: repeat(10, 110px);
-    gap: 12px;
+
+    grid-template-columns: repeat(10, 90px);
+
+    gap: 10px;
+
     justify-content: center;
 }
 
 .card {
-    width: 110px;
-    height: 90px;
+    width: 90px;
+    height: 70px;
+
     border: 2px solid #555;
-    border-radius: 10px;
+    border-radius: 8px;
 
     overflow: hidden;
+
     background-color: white;
 }
 
@@ -30,5 +51,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
     display: block;
 }
