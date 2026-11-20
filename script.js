@@ -55,7 +55,7 @@ cardData.forEach(function(card, index){
         pairId: index
     });
 })
-// This function shuffles the cards in a random order (Salvatore)
+// This function shuffles the cards in a random order (Radu)
 function shuffleCards(cardArray) {
     for (let i = cardArray.length - 1; i > 0; i--) {
         let randomIndex = Math.floor(Math.random() * (i + 1));
