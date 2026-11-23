@@ -1,23 +1,136 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="styles.css" rel="stylesheet">
-    <title>game</title>
+
+    <title>Huske Spil | VIA Memory Game</title>
 </head>
 
 <body>
-  <header class="game-header">
-        <img
-            class="game-title"
-            src="Cards/VIA University Horsens Tech Emblem.png"
-            alt="VIA University Horsens Software Engineering">
-    </header>
 
-    <main class="game-container">
-        <div id="board"></div>
-    </main>   
-<script src="script.js"></script>
+    <!-- Welcome Screen -->
+    <main id="welcome-screen">
+
+        <header class="welcome-header">
+         
+
+            <div class="logo">
+                <img
+                    src="Cards/VIA University Horsens Tech Emblem.png"
+                    alt="VIA University College">
+            </div>
+
+            <span class="header-label">VIA UNIVERSITY HORSENS</span>
+
+        </header>
+
+
+        <section class="welcome-content">
+
+            <div class="game-info">
+
+                <span class="eyebrow">MEMORY CHALLENGE</span>
+
+                <h1>
+                    How well do you know
+                    <span>your classmates?</span>
+                </h1>
+
+                <p class="description">
+                    Test your memory and get to know your classmates
+                    and teachers at VIA University College.
+                    Flip the cards, find matching faces and complete
+                    the challenge!
+                </p>
+
+                <div class="game-stats">    
+                    <div class="stat">
+                        <strong>80</strong>
+                        <span>Cards</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>40</strong>
+                        <span>Pairs</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>1</strong>
+                        <span>Challenge</span>
+                    </div>
+
+                </div>
+
+                <div class="game-rules">
+                        <span>How to play:</span>
+                        <ol>
+                            <li>Click on a card to flip it over.</li>
+                            <li>Click on another card to find a match.</li>
+                            <li>Matching pairs remain open. Incorrect pairs turn face down again</li>
+                            <li>Try to find all the matching pairs!</li>
+                        </ol>    
+                    </div>
+
+                <button id="start-button">
+                    Start Game <span>→</span>
+                </button>
+
+                <p class="footer-note">
+                    Made with ❤️ by Software Engineering students
+                </p>
+
+            </div>
+
+
+            <div class="card-preview">
+
+                <div class="preview-card card-one">
+                    <span>?</span>
+                </div>
+
+                <div class="preview-card card-two">
+                    <span>?</span>
+                </div>
+
+                <div class="preview-card card-three">
+                    <span>?</span>
+                </div>
+
+            </div>          
+
+        </section>
+
+    </main>
+
+
+    <!-- Game Screen -->
+    <main id="game-screen" hidden>
+
+        <header class="game-header">
+
+            <img
+                class="game-title"
+                src="Cards/VIA University Horsens Tech Emblem.png"
+                alt="VIA University College">
+
+        </header>
+
+        <section class="game-container">
+
+            <div id="board"></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>

@@ -125,3 +125,19 @@ function checkPair(firstCard, secondCard) {
         return false;
     }
 }
+
+/*Tim. Declare 2 variables*/
+const welcomeScreen = document.getElementById("welcome-screen");
+const gameScreen = document.getElementById("game-screen");
+
+/*Add event listener, hide Welcome Screen in and show Game Screen in function */
+document.getElementById("start-button").addEventListener("click", function() {
+    welcomeScreen.style.transition = "opacity 0.5s ";
+    welcomeScreen.style.opacity = "0";
+    gameScreen.removeAttribute("hidden");
+    gameScreen.style.opacity = "1";
+    setTimeout(function() {
+        welcomeScreen.style.display = "none";
+    }, 500);
+});
+

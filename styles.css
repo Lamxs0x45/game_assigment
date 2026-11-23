@@ -1,17 +1,18 @@
 /* The design for the game (Radu) */
 body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
 
-    background-image: url("44156943_dark_blue_gradient_background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: #E4DCFF;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #211B55;
+
 }
 
 .game-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    display:none;
 }
 
 .game-title {
@@ -30,27 +31,316 @@ body {
 
     grid-template-columns: repeat(10, 90px);
 
-    gap: 10px;
+    gap: 7px;
 
     justify-content: center;
+
+    perspective: 1000px;
 }
 
 .card {
-    width: 90px;
-    height: 70px;
+    width: 84px;
+    height: 64px;
 
     border: 2px solid #555;
     border-radius: 8px;
 
-    overflow: hidden;
+    
 
     background-color: white;
+    /*duration of animation*/
+    transition: transform 0.6s ease;
+    position: relative;
+
+    /*make the backface of the card visible when flipped*/
+    transform-style: preserve-3d;
+}
+/*Design. Tim*/
+/*backface of the card*/
+.card::before {
+
+    /*create a pseudo-element*/
+    content: "";
+
+    /*set image*/
+    background-image: url("Cards/VIA University Horsens Tech Emblem.png");
+
+    /*remain proportional to the size of the card*/
+    background-size: contain;
+    background-position: center;
+
+    /*does not repeat the image*/ 
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 100%;
+
+    /*position the image on the back of the card*/
+    position: absolute;
+    
+    /*place the image at the top left corner of the card*/
+    top: 0;
+    left: 0;
+
+    
+    
+
+    /*hide the backface of the card when not flipped*/
+    backface-visibility: hidden;
+
+    /*place the backface of the card behind the front face*/
+    z-index: 1;
+
+    /*helps to include padding and border in the element's total width and height*/
+    box-sizing: border-box;
 }
 
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
     display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    border-radius: 6px;
+}
+
+.welcome-header {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 0 40px;
+
+    display: flex;
+    /* elements to opposite edges and space between them*/
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*image properties*/
+.logo img {
+    max-width: 110px;
+    height: auto;
+}
+
+.header-label {
+    font-weight: bold;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.game-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.welcome-content {
+   
+    /*2 blocks (game-info and card-preview) will be side by side horizontally*/
+    display: flex;
+
+    /* elements to opposite edges and space between them*/
+    justify-content: space-between;
+    
+    /* vertically center the elements */
+    align-items: center;
+    
+    /*space between 2 blocks*/
+    gap: 70px;
+
+    max-width: 1200px;
+    
+    /*space 10px up and down, left and right auto*/
+    margin: 10px auto;
+
+    padding: 0 40px;
+
+}
+
+/* MEMORY CHALLENGE*/
+.eyebrow  {
+    display: block;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #7655F6; /*violet*/
+    margin-bottom: 10px;
+}
+
+/*How well do you know*/
+h1 {
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 0.8;
+}
+
+/* your classmates */
+h1 span {
+    color: #FF5277;
+}
+
+.description {
+    font-size: 18px;
+    
+    /*line height compared to font size*/
+    line-height: 1;
+}
+
+.game-stats {
+    display: flex;
+    gap: 20px;
+    /* elements to opposite edges and space between them*/
+    justify-content: flex-start;
+    border-radius: 10px;
+}   
+
+/*each ellement gets the same part of space*/
+.stat-item {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    font-size: 12px;
+}
+
+.game-stats span {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.game-stats strong {
+    font-size: 24px;
+}
+
+#start-button { 
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #FF5277; /*pink*/
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/*Start button hover effect*/
+#start-button:hover {
+    background-color: #E63E65; /*darker pink*/
+    cursor: pointer;
+
+}
+
+/*Start button decreasing when pressed*/
+#start-button:active {
+    transform: scale(0.95);
+}
+
+
+.footer-note {
+    text-align: right;
+    font-size: 12px;
+    color: #211B55;
+    margin-top: 20px;
+}
+
+/*parent container for all cards*/
+.card-preview {
+    display:flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+/*preview for each card*/
+.preview-card {
+    display: flex;
+    width: 140px;
+    height: 190px;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+    /*horizontal shadow*/
+    0 
+    /*vertical shadow*/
+    20px 
+    /*blur radius*/
+    20px
+    /*color and transparency*/
+    rgba(0, 0, 0, 0.15);
+
+    transition: transform 0.3s ease;
+}
+ /*stylize text inside each card*/
+.preview-card span {
+    font-size: 55px;
+    color: white;
+    font-weight: bold;
+}    
+
+ .card-one {
+    background-color: #7655F6;
+    transform: rotate(-10deg);
+}
+
+.card-two {
+    background-color: #FF5277;
+}
+
+.card-three {
+    background-color: #27CDB5;
+    transform: rotate(10deg);
+}
+
+.card-one:hover {
+    transform: rotate(-10deg) scale(1.05);
+}
+
+.card-two:hover {
+    transform: rotate(0) scale(1.05);
+}
+
+.card-three:hover {
+    transform: rotate(10deg) scale(1.05);
+}
+
+#game-screen {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+/*Game Rules*/
+.game-rules {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+  
+    color: #211B55;
+    font-size: 16px;
+}
+/*how to play appearance*/
+.game-rules span {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #7655F6;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+/* appearance of a list*/
+.game-rules ol {
+    margin-top: 5px;
+    list-style-type:decimal;
+}
+
+/* appearance of each item in the list*/
+.game-rules li {
+    margin-bottom: 2px;
+    line-height: 1.3;
+}
+
+/*flips the card*/
+.card.flipped {
+    transform: rotateY(180deg);
 }
