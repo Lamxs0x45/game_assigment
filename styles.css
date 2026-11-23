@@ -344,3 +344,26 @@ h1 span {
 .card.flipped {
     transform: rotateY(180deg);
 }
+
+#scoreBar {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#newGame {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 8px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #2b8cff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#newGame:hover {
+    background-color: #1a5fd0;
+}
