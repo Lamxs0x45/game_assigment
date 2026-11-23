@@ -64,13 +64,71 @@ function shuffleCards(cardArray) {
         cardArray[randomIndex] = temp;
     }
 }
-shuffleCards(cards);
-// This will render the shuffled cards (Radu) click function (Salvatore)
+
+// Load saved game from localStorage (Krzysztof)
+const STATE_KEY = "memoryGameState";
+const BEST_KEY = "memoryGameBest";
+let savedState = null;
+try {
+    savedState = JSON.parse(localStorage.getItem(STATE_KEY));
+} catch (e) {
+    savedState = null;
+}
+// Saved game is valid only if it has the right number of cards (Krzysztof)
+if (!savedState || !Array.isArray(savedState.order) || savedState.order.length != cards.length) {
+    savedState = null;
+}
+
+// Moves variables, best = fewest moves, 0 means no best yet (Krzysztof)
+let moves = savedState ? savedState.moves : 0;
+let bestMoves = Number(localStorage.getItem(BEST_KEY)) || 0;
+
+if (savedState) {
+    // Rebuild the saved card order (Krzysztof)
+    cards = savedState.order.map(function(id) {
+        return { name: cardData[id].name, image: cardData[id].image, pairId: id };
+    });
+} else {
+    shuffleCards(cards);
+}
+
+// Moves, best and new game button from the HTML (Krzysztof)
 const board = document.getElementById("board");
-cards.forEach(function(card){
+const movesElement = document.getElementById("moves");
+const bestElement = document.getElementById("best");
+const newGameButton = document.getElementById("newGame");
+newGameButton.addEventListener("click", function() {
+    localStorage.removeItem(STATE_KEY);
+    location.reload();
+});
+
+// Update the moves text (Krzysztof)
+function updateScoreBar() {
+    movesElement.textContent = moves;
+    bestElement.textContent = bestMoves || "-";
+}
+
+// Save moves and game state (Krzysztof)
+function saveState() {
+    const matched = Array.from(board.children).map(function(el) {
+        return el.classList.contains("matched");
+    });
+    localStorage.setItem(STATE_KEY, JSON.stringify({
+        order: cards.map(function(c) { return c.pairId; }),
+        matched: matched,
+        moves: moves
+    }));
+}
+
+// This will render the shuffled cards (Radu) click function (Salvatore)
+cards.forEach(function(card, index){
     const cardElement = document.createElement("div");
     cardElement.className = "card";
     cardElement.dataset.pair = card.pairId;
+    // Restore matched cards (Krzysztof)
+    if (savedState && savedState.matched[index]) {
+        cardElement.classList.add("flipped", "matched");
+    }
     cardElement.addEventListener("click", function() {
         cardClicked(cardElement);
     });
@@ -81,6 +139,7 @@ cards.forEach(function(card){
     board.appendChild(cardElement);
 });
 console.log(cards.length);
+updateScoreBar(); 
 // This lets the player click the cards (Salvatore)
 let firstCard = null; 
 let secondCard = null;   
@@ -99,11 +158,13 @@ function cardClicked(card) {
         firstCard = card;
     } else {
         secondCard = card;
+        moves++; 
         if (checkPair(firstCard, secondCard)) {
             firstCard.classList.add("matched");
             secondCard.classList.add("matched");
             firstCard = null;
             secondCard = null;
+            checkWin(); 
         } else {
             setTimeout(function() {
                 firstCard.classList.remove("flipped");
@@ -112,6 +173,8 @@ function cardClicked(card) {
                 secondCard = null;
             }, 1000);
         }
+        updateScoreBar(); 
+        saveState(); 
     }
 }
 // This checks if two cards are a correct pair (Salvatore)
@@ -123,5 +186,15 @@ function checkPair(firstCard, secondCard) {
         return true;
     } else {
         return false;
+    }
+}
+
+// When all cards are matched, save best (fewest) moves (Krzysztof)
+function checkWin() {
+    if (document.querySelectorAll(".card.matched").length == cards.length) {
+        if (bestMoves == 0 || moves < bestMoves) {
+            bestMoves = moves;
+            localStorage.setItem(BEST_KEY, bestMoves);
+        }
     }
 }
