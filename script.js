@@ -96,11 +96,6 @@ if (savedState) {
 const board = document.getElementById("board");
 const movesElement = document.getElementById("moves");
 const bestElement = document.getElementById("best");
-const newGameButton = document.getElementById("newGame");
-newGameButton.addEventListener("click", function() {
-    localStorage.removeItem(STATE_KEY);
-    location.reload();
-});
 
 // Update the moves text (Krzysztof)
 function updateScoreBar() {
@@ -189,7 +184,7 @@ function checkPair(firstCard, secondCard) {
     }
 }
 
-<<<<<<< HEAD
+
 /*Tim. Declare 2 variables*/
 const welcomeScreen = document.getElementById("welcome-screen");
 const gameScreen = document.getElementById("game-screen");
@@ -202,10 +197,10 @@ document.getElementById("start-button").addEventListener("click", function() {
     gameScreen.style.opacity = "1";
     setTimeout(function() {
         welcomeScreen.style.display = "none";
+        localStorage.removeItem(STATE_KEY);
     }, 500);
 });
 
-=======
 // When all cards are matched, save best (fewest) moves (Krzysztof)
 function checkWin() {
     if (document.querySelectorAll(".card.matched").length == cards.length) {
@@ -215,4 +210,3 @@ function checkWin() {
         }
     }
 }
->>>>>>> main
